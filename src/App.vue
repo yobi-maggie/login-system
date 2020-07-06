@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-       <router-link to="/registory">申请接口使用权限</router-link> |
+       <router-link to="/register">申请接口使用权限</router-link> |
        <router-link to="/login">获取已有appkey</router-link> |
       <router-link to="/about">查看接口文档</router-link>
     </div>
