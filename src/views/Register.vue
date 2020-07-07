@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import api from '../api/login';
 
 export default {
   name: 'registory',
@@ -105,10 +105,8 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log(this.form);
-      axios.post('http://localhost:3333/passport/logon', this.form).then((res) => {
-        console.log(res);
-        this.$massage.success('注册成功');
+      api.Logon(this.form).then(() => {
+        this.$message.success('注册成功');
         this.$router.push({
           name: 'Login',
         });
@@ -120,12 +118,14 @@ export default {
         : [`${value}@gmail.com`, `${value}@163.com`, `${value}@qq.com`];
     },
     getCode() {
-      axios.post('http://localhost:3333/passport/getCode', {
+      api.GetCode({
         username: this.form.username,
         password: this.form.password,
         email: this.form.email,
-      }).then((res) => {
-        console.log(res);
+      }).then(() => {
+        this.$message.success('验证码已发送至您的邮箱');
+      }).catch((err) => {
+        this.$message.error(err);
       });
     },
   },

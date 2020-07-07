@@ -20,13 +20,16 @@
         />
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-        <a-button type="primary" html-type="submit">Submit</a-button>
+        <a-button type="primary" html-type="submit">提交</a-button>
+        <a-button type="default" @click="findPassword">找回密码</a-button>
       </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script>
+import api from '../api/login';
+
 export default {
   name: 'Home',
   data() {
@@ -40,9 +43,16 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values);
+          api.Login(values).then((data) => {
+            this.$alert(`您的appkey是${data.appkey}`);
+          }).catch((error) => {
+            this.$message.error(error);
+          });
         }
       });
+    },
+    findPassword() {
+
     },
   },
 };
