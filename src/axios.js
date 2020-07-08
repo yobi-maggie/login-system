@@ -11,6 +11,7 @@ instance.interceptors.response.use(
     if (response.status !== 200) {
       return response.statusText;
     }
+
     if (response.data.status !== 'success') {
       return Promise.reject(response.data.msg);
     }

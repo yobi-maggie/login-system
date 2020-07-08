@@ -16,7 +16,6 @@ export default {
   },
   created() {
     axios.get('http://localhost:3333/vue-mall-readme').then((res) => {
-      console.log(res.data);
       this.dom = res.data;
     });
   },
